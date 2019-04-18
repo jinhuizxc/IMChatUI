@@ -1,4 +1,4 @@
-package com.example.imchatui.conversation;
+package com.example.imchatui.ext.core;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
@@ -6,12 +6,14 @@ import android.support.v4.view.ViewPager;
 import android.widget.FrameLayout;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.example.imchatui.annotation.ExtContextMenuItem;
 import com.example.imchatui.model.Conversation;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 public class ConversationExtension {
@@ -73,24 +75,28 @@ public class ConversationExtension {
         }
     }
 
-
-    public void bind(ConversationViewModel conversationViewModel, Conversation conversation) {
-        this.conversation = conversation;
-        setupExtViewPager(extViewPager);
-
-        for (int i = 0; i < exts.size(); i++) {
-            exts.get(i).onBind(activity, conversationViewModel, conversation, this, i);
-        }
-    }
+     // 绑定会话model
+//    public void bind(ConversationViewModel conversationViewModel, Conversation conversation) {
+//        this.conversation = conversation;
+//        setupExtViewPager(extViewPager);
+//
+//        for (int i = 0; i < exts.size(); i++) {
+//            exts.get(i).onBind(activity, conversationViewModel, conversation, this, i);
+//        }
+//    }
 
     private void setupExtViewPager(ViewPager viewPager) {
-        exts = ConversationExtManager.getInstance().getConversationExts(conversation);
-        if (exts.isEmpty()) {
-            return;
-        }
+//        exts = ConversationExtManager.getInstance().getConversationExts(conversation);
+//        if (exts.isEmpty()) {
+//            return;
+//        }
         viewPager.setAdapter(new ConversationExtPagerAdapter(exts, index -> {
             onConversationExtClick(exts.get(index));
         }));
+    }
+
+    public void bind() {
+        setupExtViewPager(extViewPager);
     }
 
 
@@ -138,6 +144,8 @@ public class ConversationExtension {
         int index = requestCode & 0x7F;
         exts.get(index).onActivityResult((requestCode >> 7) & 0xFF, resultCode, data);
     }
+
+
 
     private static class ExtMenuItemWrapper {
         ExtContextMenuItem extContextMenuItem;

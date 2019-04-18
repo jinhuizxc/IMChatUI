@@ -2,17 +2,18 @@ package com.example.imchatui.model.message;
 
 import android.os.Parcelable;
 
+import com.example.imchatui.annotation.ContentTag;
+import com.example.imchatui.annotation.PersistFlag;
+
 import java.util.List;
 
-import cn.wildfirechat.message.core.ContentTag;
-import cn.wildfirechat.message.core.MessagePayload;
-import cn.wildfirechat.message.core.PersistFlag;
 
 /**
  * Created by heavyrain lee on 2017/12/6.
  */
 
 public abstract class MessageContent implements Parcelable {
+
     public abstract MessagePayload encode();
 
     public abstract void decode(MessagePayload payload);

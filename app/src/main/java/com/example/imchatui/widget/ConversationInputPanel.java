@@ -2,9 +2,7 @@ package com.example.imchatui.widget;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +12,7 @@ import android.text.Editable;
 import android.text.Selection;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,23 +22,29 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.example.imchatui.R;
-import com.example.imchatui.conversation.ConversationExtension;
+import com.example.imchatui.audio.AudioRecorderPanel;
 import com.example.imchatui.conversation.mention.MentionSpan;
+import com.example.imchatui.ext.core.ConversationExtension;
+import com.example.imchatui.model.message.TypingMessageContent;
 import com.lqr.emoji.EmotionLayout;
 import com.lqr.emoji.IEmotionExtClickListener;
 import com.lqr.emoji.IEmotionSelectedListener;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
+/**
+ * 底部面板
+ */
 public class ConversationInputPanel extends FrameLayout implements IEmotionSelectedListener {
+
+    private static final String TAG = ConversationInputPanel.class.getSimpleName();
 
     @BindView(R.id.audioImageView)
     ImageView audioImageView;
@@ -56,6 +61,7 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
 
     @BindView(R.id.emotionContainerFrameLayout)
     KeyboardHeightFrameLayout emotionContainerFrameLayout;
+    // 表情布局
     @BindView(R.id.emotionLayout)
     EmotionLayout emotionLayout;
     @BindView(R.id.extContainerContainerLayout)
@@ -63,6 +69,7 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
 
     @BindView(R.id.inputPanelFrameLayout)
     FrameLayout inputContainerFrameLayout;
+    // 其他功能
     @BindView(R.id.conversationExtViewPager)
     ViewPager extViewPager;
 
@@ -109,13 +116,23 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
 
     }
 
+    /**
+     * 创建会话
+     * @param conversationViewModel
+     * @param conversation
+     */
 //    public void setupConversation(ConversationViewModel conversationViewModel, Conversation conversation) {
-//        this.conversationViewModel = conversationViewModel;
-//        this.conversation = conversation;
+////        this.conversationViewModel = conversationViewModel;
+////        this.conversation = conversation;
 //        this.extension.bind(conversationViewModel, conversation);
 //
 //        setDraft();
 //    }
+
+    public void setupConversation() {
+        this.extension.bind();
+        setDraft();
+    }
 
     public void init(final FragmentActivity activity, InputAwareLayout rootInputAwareLayout) {
         LayoutInflater.from(getContext()).inflate(R.layout.conversation_input_panel, this, true);
@@ -124,7 +141,7 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
         this.activity = activity;
         this.rootLinearLayout = rootInputAwareLayout;
 
-        this.extension = new ConversationExtension(activity, this, extViewPager);
+//        this.extension = new ConversationExtension(activity, this, extViewPager);
 
 
         sharedPreferences = getContext().getSharedPreferences("sticker", Context.MODE_PRIVATE);
@@ -158,31 +175,31 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
         });
 
         // audio record panel
-//        AudioRecorderPanel audioRecorderPanel = new AudioRecorderPanel(getContext());
-//        audioRecorderPanel.attach(rootLinearLayout, audioButton);
-//        audioRecorderPanel.setRecordListener(new AudioRecorderPanel.OnRecordListener() {
-//            @Override
-//            public void onRecordSuccess(String audioFile, int duration) {
-//                //发送文件
-//                File file = new File(audioFile);
-//                if (file.exists()) {
+        AudioRecorderPanel audioRecorderPanel = new AudioRecorderPanel(getContext());
+        audioRecorderPanel.attach(rootLinearLayout, audioButton);
+        audioRecorderPanel.setRecordListener(new AudioRecorderPanel.OnRecordListener() {
+            @Override
+            public void onRecordSuccess(String audioFile, int duration) {
+                // 发送文件
+                File file = new File(audioFile);
+                if (file.exists()) {
 //                    conversationViewModel.sendAudioFile(Uri.parse(audioFile), duration);
-//                }
-//            }
-//
-//            @Override
-//            public void onRecordFail(String reason) {
-//                // TODO
-//            }
-//
-//            @Override
-//            public void onRecordStateChanged(AudioRecorderPanel.RecordState state) {
-//                if (state == AudioRecorderPanel.RecordState.START) {
-//                    TypingMessageContent content = new TypingMessageContent(TypingMessageContent.TYPING_VOICE);
+                }
+            }
+
+            @Override
+            public void onRecordFail(String reason) {
+                // TODO
+            }
+
+            @Override
+            public void onRecordStateChanged(AudioRecorderPanel.RecordState state) {
+                if (state == AudioRecorderPanel.RecordState.START) {
+                    TypingMessageContent content = new TypingMessageContent(TypingMessageContent.TYPING_VOICE);
 //                    conversationViewModel.sendMessage(content);
-//                }
-//            }
-//        });
+                }
+            }
+        });
 
         // emotion
         emotionLayout.setEmotionSelectedListener(this);
@@ -200,6 +217,10 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
 
     }
 
+
+    /**
+     * 添加按钮的点击事件
+     */
     @OnClick(R.id.extImageView)
     void onExtImageViewClick() {
         if (rootLinearLayout.getCurrentInput() == extContainerFrameLayout) {
@@ -210,6 +231,9 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
         }
     }
 
+    /**
+     * 表情按钮
+     */
     @OnClick(R.id.emotionImageView)
     void onEmotionImageViewClick() {
         if (rootLinearLayout.getCurrentInput() == emotionContainerFrameLayout) {
@@ -349,6 +373,9 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
         } else {
             sendButton.setVisibility(View.VISIBLE);
         }
+        Log.e(TAG, "hideAudioButton: " + rootLinearLayout
+                + ", " + emotionContainerFrameLayout
+                + "," + editText);
         rootLinearLayout.show(editText, emotionContainerFrameLayout);
         audioImageView.setImageResource(R.mipmap.ic_cheat_voice);
     }

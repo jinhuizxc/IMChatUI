@@ -23,8 +23,8 @@ public abstract class MessageContentViewHolder extends RecyclerView.ViewHolder {
     protected RecyclerView.Adapter adapter;
 //    protected ConversationViewModel conversationViewModel;
 
-    @BindView(R.id.timeTextView)
-    TextView timeTextView;
+//    @BindView(R.id.timeTextView)
+//    TextView timeTextView;
 
 
     public MessageContentViewHolder(FragmentActivity activity, RecyclerView.Adapter adapter, View itemView) {
@@ -42,27 +42,32 @@ public abstract class MessageContentViewHolder extends RecyclerView.ViewHolder {
 
     /**
      * @param uiMessage
-     * @param tag
+     * @param
      * @return 返回true，将从context menu中排除
      */
 
     public abstract boolean contextMenuItemFilter(UiMessage uiMessage, String itemTitle);
 
+    /**
+     * 设置消息时间
+     * @param item
+     * @param position
+     */
     protected void setMessageTime(Message item, int position) {
-        long msgTime = item.serverTime;
-        if (position > 0) {
-            Message preMsg = ((ConversationMessageAdapter) adapter).getItem(position - 1).message;
-            long preMsgTime = preMsg.serverTime;
-            if (msgTime - preMsgTime > (5 * 60 * 1000)) {
-                timeTextView.setVisibility(View.VISIBLE);
-                timeTextView.setText(TimeUtils.getMsgFormatTime(msgTime));
-            } else {
-                timeTextView.setVisibility(View.GONE);
-            }
-        } else {
-            timeTextView.setVisibility(View.VISIBLE);
-            timeTextView.setText(TimeUtils.getMsgFormatTime(msgTime));
-        }
+//        long msgTime = item.serverTime;
+//        if (position > 0) {
+//            Message preMsg = ((ConversationMessageAdapter) adapter).getItem(position - 1).message;
+//            long preMsgTime = preMsg.serverTime;
+//            if (msgTime - preMsgTime > (5 * 60 * 1000)) {
+//                timeTextView.setVisibility(View.VISIBLE);
+//                timeTextView.setText(TimeUtils.getMsgFormatTime(msgTime));
+//            } else {
+//                timeTextView.setVisibility(View.GONE);
+//            }
+//        } else {
+//            timeTextView.setVisibility(View.VISIBLE);
+//            timeTextView.setText(TimeUtils.getMsgFormatTime(msgTime));
+//        }
     }
 
 }

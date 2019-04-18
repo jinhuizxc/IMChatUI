@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +16,16 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.imchatui.R;
+import com.example.imchatui.annotation.EnableContextMenu;
+import com.example.imchatui.annotation.LayoutRes;
+import com.example.imchatui.annotation.MessageContextMenuItem;
+import com.example.imchatui.annotation.ReceiveLayoutRes;
+import com.example.imchatui.annotation.SendLayoutRes;
 import com.example.imchatui.model.UiMessage;
 import com.example.imchatui.model.UserInfo;
+import com.example.imchatui.model.message.Message;
 import com.example.imchatui.viewmodel.LoadingViewHolder;
+import com.example.imchatui.viewmodel.MessageContentViewHolder;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -29,6 +37,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ConversationMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
     private Context mContext;
 
     // check or normal
@@ -157,73 +166,73 @@ public class ConversationMessageAdapter extends RecyclerView.Adapter<RecyclerVie
 
         int direction = viewType >> 24;
         int messageType = viewType & 0x7FFFFF;
-        Class<? extends MessageContentViewHolder> viewHolderClazz = MessageViewHolderManager.getInstance().getMessageContentViewHolder(messageType);
-        SendLayoutRes sendLayoutRes = viewHolderClazz.getAnnotation(SendLayoutRes.class);
-        ReceiveLayoutRes receiveLayoutRes = viewHolderClazz.getAnnotation(ReceiveLayoutRes.class);
-        LayoutRes layoutRes = viewHolderClazz.getAnnotation(LayoutRes.class);
+//        Class<? extends MessageContentViewHolder> viewHolderClazz = MessageViewHolderManager.getInstance().getMessageContentViewHolder(messageType);
+//        SendLayoutRes sendLayoutRes = viewHolderClazz.getAnnotation(SendLayoutRes.class);
+//        ReceiveLayoutRes receiveLayoutRes = viewHolderClazz.getAnnotation(ReceiveLayoutRes.class);
+//        LayoutRes layoutRes = viewHolderClazz.getAnnotation(LayoutRes.class);
 
-        int sendResId = 0, receiveResId = 0;
-        if (sendLayoutRes != null) {
-            sendResId = sendLayoutRes.resId();
-        } else if (layoutRes != null) {
-            sendResId = layoutRes.resId();
-        }
+//        int sendResId = 0, receiveResId = 0;
+//        if (sendLayoutRes != null) {
+//            sendResId = sendLayoutRes.resId();
+//        } else if (layoutRes != null) {
+//            sendResId = layoutRes.resId();
+//        }
+//
+//        if (receiveLayoutRes != null) {
+//            receiveResId = receiveLayoutRes.resId();
+//        } else if (layoutRes != null) {
+//            receiveResId = layoutRes.resId();
+//        }
 
-        if (receiveLayoutRes != null) {
-            receiveResId = receiveLayoutRes.resId();
-        } else if (layoutRes != null) {
-            receiveResId = layoutRes.resId();
-        }
+//        View itemView;
+//        ViewStub viewStub;
+//        if (SimpleNotificationMessageContentViewHolder.class.isAssignableFrom(viewHolderClazz)) {
+//            itemView = LayoutInflater.from(mContext).inflate(R.layout.conversation_item_notification_containr, parent, false);
+//            viewStub = itemView.findViewById(R.id.contentViewStub);
+//            viewStub.setLayoutResource(layoutRes.resId());
+//        } else {
+//            if (direction == 0) {
+//                itemView = LayoutInflater.from(mContext).inflate(R.layout.conversation_item_message_container_send, parent, false);
+//                viewStub = itemView.findViewById(R.id.contentViewStub);
+//                viewStub.setLayoutResource(sendResId > 0 ? sendResId : R.layout.conversation_item_unknown_send);
+//            } else {
+//                itemView = LayoutInflater.from(mContext).inflate(R.layout.conversation_item_message_container_receive, parent, false);
+//                viewStub = itemView.findViewById(R.id.contentViewStub);
+//                viewStub.setLayoutResource(receiveResId > 0 ? receiveResId : R.layout.conversation_item_unknown_receive);
+//            }
+//        }
+//        try {
+//            View view = viewStub.inflate();
+//            if (view instanceof ImageView) {
+//                ((ImageView) view).setImageDrawable(null);
+//            }
+//        } catch (Exception e) {
+//            if (e.getMessage() != null && e.getMessage().contains("webview")) {
+//                Toast.makeText(mContext, "请安装: Android System WebView", Toast.LENGTH_SHORT).show();
+//            }
+//        }
 
-        View itemView;
-        ViewStub viewStub;
-        if (SimpleNotificationMessageContentViewHolder.class.isAssignableFrom(viewHolderClazz)) {
-            itemView = LayoutInflater.from(mContext).inflate(R.layout.conversation_item_notification_containr, parent, false);
-            viewStub = itemView.findViewById(R.id.contentViewStub);
-            viewStub.setLayoutResource(layoutRes.resId());
-        } else {
-            if (direction == 0) {
-                itemView = LayoutInflater.from(mContext).inflate(R.layout.conversation_item_message_container_send, parent, false);
-                viewStub = itemView.findViewById(R.id.contentViewStub);
-                viewStub.setLayoutResource(sendResId > 0 ? sendResId : R.layout.conversation_item_unknown_send);
-            } else {
-                itemView = LayoutInflater.from(mContext).inflate(R.layout.conversation_item_message_container_receive, parent, false);
-                viewStub = itemView.findViewById(R.id.contentViewStub);
-                viewStub.setLayoutResource(receiveResId > 0 ? receiveResId : R.layout.conversation_item_unknown_receive);
-            }
-        }
-        try {
-            View view = viewStub.inflate();
-            if (view instanceof ImageView) {
-                ((ImageView) view).setImageDrawable(null);
-            }
-        } catch (Exception e) {
-            if (e.getMessage() != null && e.getMessage().contains("webview")) {
-                Toast.makeText(mContext, "请安装: Android System WebView", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        try {
-            Constructor constructor = viewHolderClazz.getConstructor(FragmentActivity.class, RecyclerView.Adapter.class, View.class);
-            MessageContentViewHolder viewHolder = (MessageContentViewHolder) constructor.newInstance(mContext, this, itemView);
-
-            processContentLongClick(viewHolderClazz, viewHolder, itemView);
-
-            if (viewHolder instanceof SimpleNotificationMessageContentViewHolder) {
-                return viewHolder;
-            }
-            processPortraitClick(viewHolder, itemView);
-            processPortraitLongClick(viewHolder, itemView);
-            return viewHolder;
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Constructor constructor = viewHolderClazz.getConstructor(FragmentActivity.class, RecyclerView.Adapter.class, View.class);
+//            MessageContentViewHolder viewHolder = (MessageContentViewHolder) constructor.newInstance(mContext, this, itemView);
+//
+//            processContentLongClick(viewHolderClazz, viewHolder, itemView);
+//
+////            if (viewHolder instanceof SimpleNotificationMessageContentViewHolder) {
+////                return viewHolder;
+////            }
+//            processPortraitClick(viewHolder, itemView);
+//            processPortraitLongClick(viewHolder, itemView);
+//            return viewHolder;
+//        } catch (NoSuchMethodException e) {
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        } catch (InstantiationException e) {
+//            e.printStackTrace();
+//        } catch (InvocationTargetException e) {
+//            e.printStackTrace();
+//        }
         return null;
     }
 
@@ -249,27 +258,27 @@ public class ConversationMessageAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     private void processPortraitClick(MessageContentViewHolder viewHolder, View itemView) {
-        itemView.findViewById(R.id.portraitImageView).setOnClickListener(v -> {
-            if (onPortraitClickListener != null) {
-                int position = viewHolder.getAdapterPosition();
-                UiMessage message = getItem(position);
-                // FIXME: 2019/2/15 getUserInfo可能返回null
-                onPortraitClickListener.onPortraitClick(ChatManager.Instance().getUserInfo(message.message.sender, false));
-            }
-        });
+//        itemView.findViewById(R.id.portraitImageView).setOnClickListener(v -> {
+//            if (onPortraitClickListener != null) {
+//                int position = viewHolder.getAdapterPosition();
+//                UiMessage message = getItem(position);
+//                // FIXME: 2019/2/15 getUserInfo可能返回null
+//                onPortraitClickListener.onPortraitClick(ChatManager.Instance().getUserInfo(message.message.sender, false));
+//            }
+//        });
     }
 
     private void processPortraitLongClick(MessageContentViewHolder viewHolder, View itemView) {
-        itemView.findViewById(R.id.portraitImageView).setOnLongClickListener(v -> {
-                    if (onPortraitLongClickListener != null) {
-                        int position = viewHolder.getAdapterPosition();
-                        UiMessage message = getItem(position);
-                        onPortraitLongClickListener.onPortraitLongClick(ChatManager.Instance().getUserInfo(message.message.sender, false));
-                        return true;
-                    }
-                    return false;
-                }
-        );
+//        itemView.findViewById(R.id.portraitImageView).setOnLongClickListener(v -> {
+//                    if (onPortraitLongClickListener != null) {
+//                        int position = viewHolder.getAdapterPosition();
+//                        UiMessage message = getItem(position);
+//                        onPortraitLongClickListener.onPortraitLongClick(ChatManager.Instance().getUserInfo(message.message.sender, false));
+//                        return true;
+//                    }
+//                    return false;
+//                }
+//        );
     }
 
     /**
@@ -368,9 +377,9 @@ public class ConversationMessageAdapter extends RecyclerView.Adapter<RecyclerVie
                 return true;
             }
         };
-        View contentLayout = itemView.findViewById(R.id.contentFrameLayout);
-        contentLayout.setOnLongClickListener(listener);
-        setOnLongClickListenerForAllClickableChildView(contentLayout, listener);
+//        View contentLayout = itemView.findViewById(R.id.contentFrameLayout);
+//        contentLayout.setOnLongClickListener(listener);
+//        setOnLongClickListenerForAllClickableChildView(contentLayout, listener);
     }
 
     @Override
@@ -388,14 +397,14 @@ public class ConversationMessageAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     // 返回message type + message direction
-    @Override
-    public int getItemViewType(int position) {
-        if (getItem(position) == null) {
-            return R.layout.conversation_item_loading;
-        }
-        Message msg = getItem(position).message;
-        return msg.direction.value() << 24 | msg.content.getType();
-    }
+//    @Override
+//    public int getItemViewType(int position) {
+//        if (getItem(position) == null) {
+//            return R.layout.conversation_item_loading;
+//        }
+//        Message msg = getItem(position).message;
+//        return msg.direction.value() << 24 | msg.content.getType();
+//    }
 
     @Override
     public int getItemCount() {

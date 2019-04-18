@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 
+import com.example.imchatui.adapter.ConversationMessageAdapter;
 import com.example.imchatui.base.BaseActivity;
 import com.example.imchatui.model.Conversation;
 import com.example.imchatui.widget.ConversationInputPanel;
@@ -71,13 +72,13 @@ public class ConversationActivity extends BaseActivity implements
         initView();
         sharedPreferences = getSharedPreferences("sticker", Context.MODE_PRIVATE);
         Intent intent = getIntent();
-//        conversation = intent.getParcelableExtra("conversation");
+        conversation = intent.getParcelableExtra("conversation");
         conversationTitle = intent.getStringExtra("conversationTitle");
         initialFocusedMessageId = intent.getLongExtra("toFocusMessageId", -1);
         if (conversation == null) {
             finish();
         }
-//        setupConversation(conversation);
+        setupConversation(conversation);
 //        conversationViewModel.clearUnreadStatus(conversation);
     }
 
@@ -85,15 +86,8 @@ public class ConversationActivity extends BaseActivity implements
         handler = new Handler();
         rootLinearLayout.addOnKeyboardShownListener(this);
 
-//        swipeRefreshLayout.setOnRefreshListener(() -> loadMoreOldMessages());
-
-        // message list
-//        adapter = new ConversationMessageAdapter(this);
-//        adapter.setOnPortraitClickListener(this);
-//        adapter.setOnPortraitLongClickListener(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-//        recyclerView.setAdapter(adapter);
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

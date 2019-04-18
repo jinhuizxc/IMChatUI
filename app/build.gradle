@@ -35,8 +35,11 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     implementation 'com.lqr.emoji:library:1.0.2'
     //    implementation 'com.lqr.imagepicker:library:1.0.0'
-    //    implementation 'cjt.library.wheel:camera:1.1.9'
+    // camera
+    implementation 'cjt.library.wheel:camera:1.1.9'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation files('libs/joda-time-2.5.jar')
     implementation files('libs/joda-time-2.5-sources.jar')
+    implementation 'com.blankj:utilcode:1.23.6'
+    implementation project(':imagepicker')
 }
