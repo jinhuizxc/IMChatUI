@@ -6,15 +6,18 @@ import android.content.Intent;
 import android.view.View;
 
 
+import com.example.imchatui.R;
 import com.example.imchatui.annotation.ExtContextMenuItem;
 import com.example.imchatui.ext.core.ConversationExt;
 import com.example.imchatui.model.Conversation;
-import com.example.imchatui.model.message.TypingMessageContent;
+import com.example.imchatui.utils.ImageUtils;
 import com.lqr.imagepicker.ImagePicker;
 import com.lqr.imagepicker.bean.ImageItem;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import cn.wildfirechat.message.TypingMessageContent;
 
 
 public class ImageExt extends ConversationExt {
@@ -52,7 +55,7 @@ public class ImageExt extends ConversationExt {
 //                        //imageFileThumb = ImageUtils.genThumbImgFile(imageFileSource.getAbsolutePath());
 //                        imageFileThumb = imageFileSource;
 //                    }
-                    conversationViewModel.sendImgMsg(imageFileThumb, imageFileSource);
+//                    conversationViewModel.sendImgMsg(imageFileThumb, imageFileSource);
                 }
             }
         }

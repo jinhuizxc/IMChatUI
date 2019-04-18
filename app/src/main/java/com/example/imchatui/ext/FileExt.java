@@ -6,14 +6,16 @@ import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 
+import com.example.imchatui.R;
+import com.example.imchatui.annotation.ExtContextMenuItem;
+import com.example.imchatui.ext.core.ConversationExt;
+import com.example.imchatui.kit.FileUtils;
+import com.example.imchatui.model.Conversation;
+
 import java.io.File;
 
-import cn.wildfire.chat.kit.annotation.ExtContextMenuItem;
-import cn.wildfire.chat.kit.conversation.ext.core.ConversationExt;
-import cn.wildfire.chat.kit.utils.FileUtils;
-import cn.wildfirechat.chat.R;
 import cn.wildfirechat.message.TypingMessageContent;
-import cn.wildfirechat.model.Conversation;
+
 
 public class FileExt extends ConversationExt {
 
@@ -28,7 +30,7 @@ public class FileExt extends ConversationExt {
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         startActivityForResult(intent, 100);
         TypingMessageContent content = new TypingMessageContent(TypingMessageContent.TYPING_FILE);
-        conversationViewModel.sendMessage(content);
+//        conversationViewModel.sendMessage(content);
     }
 
     @Override
@@ -36,7 +38,7 @@ public class FileExt extends ConversationExt {
         if (resultCode == Activity.RESULT_OK) {
             Uri uri = data.getData();
             String path = FileUtils.getPath(context, uri);
-            conversationViewModel.sendFileMsg(new File(path));
+//            conversationViewModel.sendFileMsg(new File(path));
         }
     }
 

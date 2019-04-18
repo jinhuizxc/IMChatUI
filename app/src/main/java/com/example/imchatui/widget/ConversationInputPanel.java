@@ -27,7 +27,6 @@ import com.example.imchatui.R;
 import com.example.imchatui.audio.AudioRecorderPanel;
 import com.example.imchatui.conversation.mention.MentionSpan;
 import com.example.imchatui.ext.core.ConversationExtension;
-import com.example.imchatui.model.message.TypingMessageContent;
 import com.lqr.emoji.EmotionLayout;
 import com.lqr.emoji.IEmotionExtClickListener;
 import com.lqr.emoji.IEmotionSelectedListener;
@@ -38,6 +37,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
+import cn.wildfirechat.message.TypingMessageContent;
 
 /**
  * 底部面板

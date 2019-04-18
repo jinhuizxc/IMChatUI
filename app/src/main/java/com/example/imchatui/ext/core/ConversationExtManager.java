@@ -6,6 +6,7 @@ import com.example.imchatui.ext.ImageExt;
 import com.example.imchatui.ext.LocationExt;
 import com.example.imchatui.ext.ShootExt;
 import com.example.imchatui.ext.VoipExt;
+import com.example.imchatui.model.Conversation;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;

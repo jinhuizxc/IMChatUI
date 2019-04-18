@@ -70,15 +70,15 @@ public class ConversationActivity extends BaseActivity implements
     protected void afterViews() {
         super.afterViews();
         initView();
-        sharedPreferences = getSharedPreferences("sticker", Context.MODE_PRIVATE);
-        Intent intent = getIntent();
-        conversation = intent.getParcelableExtra("conversation");
-        conversationTitle = intent.getStringExtra("conversationTitle");
-        initialFocusedMessageId = intent.getLongExtra("toFocusMessageId", -1);
-        if (conversation == null) {
-            finish();
-        }
-        setupConversation(conversation);
+//        sharedPreferences = getSharedPreferences("sticker", Context.MODE_PRIVATE);
+//        Intent intent = getIntent();
+//        conversation = intent.getParcelableExtra("conversation");
+//        conversationTitle = intent.getStringExtra("conversationTitle");
+//        initialFocusedMessageId = intent.getLongExtra("toFocusMessageId", -1);
+//        if (conversation == null) {
+//            finish();
+//        }
+//        setupConversation(conversation);
 //        conversationViewModel.clearUnreadStatus(conversation);
     }
 

@@ -5,10 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import cn.wildfire.chat.kit.annotation.ExtContextMenuItem;
-import cn.wildfire.chat.kit.conversation.ext.core.ConversationExt;
-import cn.wildfirechat.chat.R;
-import cn.wildfirechat.model.Conversation;
+import com.example.imchatui.R;
+import com.example.imchatui.annotation.ExtContextMenuItem;
+import com.example.imchatui.ext.core.ConversationExt;
+import com.example.imchatui.model.Conversation;
+
 
 //用来演示类似微信语音输入那种扩展
 public class ExampleAudioInputExt extends ConversationExt {

@@ -1,13 +1,12 @@
-package com.example.imchatui.model.message;
+package cn.wildfirechat.message;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
-import com.example.imchatui.annotation.ContentTag;
-import com.example.imchatui.annotation.PersistFlag;
+import cn.wildfirechat.message.core.ContentTag;
+import cn.wildfirechat.message.core.MessagePayload;
+import cn.wildfirechat.message.core.PersistFlag;
 
-import static com.example.imchatui.annotation.MessageContentType.ContentType_Typing;
-
+import static cn.wildfirechat.message.core.MessageContentType.ContentType_Typing;
 
 /**
  * Created by heavyrain lee on 2017/12/6.
@@ -15,7 +14,6 @@ import static com.example.imchatui.annotation.MessageContentType.ContentType_Typ
 
 @ContentTag(type = ContentType_Typing, flag = PersistFlag.Transparent)
 public class TypingMessageContent extends MessageContent {
-
     public static final int TYPING_TEXT = 0;
     public static final int TYPING_VOICE = 1;
     public static final int TYPING_CAMERA = 2;
@@ -73,7 +71,7 @@ public class TypingMessageContent extends MessageContent {
         this.type = in.readInt();
     }
 
-    public static final Parcelable.Creator<TypingMessageContent> CREATOR = new Parcelable.Creator<TypingMessageContent>() {
+    public static final Creator<TypingMessageContent> CREATOR = new Creator<TypingMessageContent>() {
         @Override
         public TypingMessageContent createFromParcel(Parcel source) {
             return new TypingMessageContent(source);

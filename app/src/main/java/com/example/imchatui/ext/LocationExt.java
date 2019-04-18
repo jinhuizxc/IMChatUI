@@ -4,13 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import cn.wildfire.chat.app.third.location.data.LocationData;
-import cn.wildfire.chat.app.third.location.ui.activity.MyLocationActivity;
-import cn.wildfire.chat.kit.annotation.ExtContextMenuItem;
-import cn.wildfire.chat.kit.conversation.ext.core.ConversationExt;
-import cn.wildfirechat.chat.R;
+
+import com.example.imchatui.R;
+import com.example.imchatui.annotation.ExtContextMenuItem;
+import com.example.imchatui.ext.core.ConversationExt;
+import com.example.imchatui.location.MyLocationActivity;
+import com.example.imchatui.location.data.LocationData;
+import com.example.imchatui.model.Conversation;
+
 import cn.wildfirechat.message.TypingMessageContent;
-import cn.wildfirechat.model.Conversation;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -25,14 +27,14 @@ public class LocationExt extends ConversationExt {
         Intent intent = new Intent(context, MyLocationActivity.class);
         startActivityForResult(intent, 100);
         TypingMessageContent content = new TypingMessageContent(TypingMessageContent.TYPING_LOCATION);
-        conversationViewModel.sendMessage(content);
+//        conversationViewModel.sendMessage(content);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             LocationData locationData = (LocationData) data.getSerializableExtra("location");
-            conversationViewModel.sendLocationMessage(locationData);
+//            conversationViewModel.sendLocationMessage(locationData);
         }
     }
 
