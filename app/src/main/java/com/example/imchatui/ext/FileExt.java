@@ -7,14 +7,12 @@ import android.net.Uri;
 import android.view.View;
 
 import com.example.imchatui.R;
-import com.example.imchatui.annotation.ExtContextMenuItem;
-import com.example.imchatui.ext.core.ConversationExt;
+import com.example.imchatui.kit.annotation.ExtContextMenuItem;
+import com.example.imchatui.manager.ConversationExt;
 import com.example.imchatui.kit.FileUtils;
-import com.example.imchatui.model.Conversation;
-
-import java.io.File;
 
 import cn.wildfirechat.message.TypingMessageContent;
+import cn.wildfirechat.model.Conversation;
 
 
 public class FileExt extends ConversationExt {

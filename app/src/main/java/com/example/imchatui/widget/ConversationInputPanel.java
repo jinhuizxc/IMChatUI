@@ -22,11 +22,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.example.imchatui.R;
 import com.example.imchatui.audio.AudioRecorderPanel;
-import com.example.imchatui.conversation.mention.MentionSpan;
-import com.example.imchatui.ext.core.ConversationExtension;
+import com.example.imchatui.kit.conversation.ConversationViewModel;
+import com.example.imchatui.kit.conversation.mention.MentionSpan;
+import com.example.imchatui.manager.ConversationExtension;
 import com.lqr.emoji.EmotionLayout;
 import com.lqr.emoji.IEmotionExtClickListener;
 import com.lqr.emoji.IEmotionSelectedListener;
@@ -38,6 +38,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import cn.wildfirechat.message.TypingMessageContent;
+import cn.wildfirechat.model.Conversation;
 
 /**
  * 底部面板
@@ -116,23 +117,19 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
 
     }
 
-    /**
-     * 创建会话
-     * @param conversationViewModel
-     * @param conversation
-     */
-//    public void setupConversation(ConversationViewModel conversationViewModel, Conversation conversation) {
-////        this.conversationViewModel = conversationViewModel;
-////        this.conversation = conversation;
-//        this.extension.bind(conversationViewModel, conversation);
-//
-//        setDraft();
-//    }
+//    /**
+//     * 创建会话
+//     * @param conversationViewModel
+//     * @param conversation
+//     */
+    public void setupConversation(ConversationViewModel conversationViewModel, Conversation conversation) {
+//        this.conversationViewModel = conversationViewModel;
+//        this.conversation = conversation;
+        this.extension.bind(conversationViewModel, conversation);
 
-    public void setupConversation() {
-        this.extension.bind();
         setDraft();
     }
+
 
     public void init(final FragmentActivity activity, InputAwareLayout rootInputAwareLayout) {
         LayoutInflater.from(getContext()).inflate(R.layout.conversation_input_panel, this, true);
@@ -141,7 +138,7 @@ public class ConversationInputPanel extends FrameLayout implements IEmotionSelec
         this.activity = activity;
         this.rootLinearLayout = rootInputAwareLayout;
 
-//        this.extension = new ConversationExtension(activity, this, extViewPager);
+        this.extension = new ConversationExtension(activity, this, extViewPager);
 
 
         sharedPreferences = getContext().getSharedPreferences("sticker", Context.MODE_PRIVATE);

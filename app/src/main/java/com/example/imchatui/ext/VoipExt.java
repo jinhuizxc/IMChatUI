@@ -6,12 +6,12 @@ import android.content.Intent;
 import android.view.View;
 
 import com.example.imchatui.R;
-import com.example.imchatui.annotation.ExtContextMenuItem;
-import com.example.imchatui.ext.core.ConversationExt;
-import com.example.imchatui.model.Conversation;
+import com.example.imchatui.kit.annotation.ExtContextMenuItem;
+import com.example.imchatui.manager.ConversationExt;
 
 import java.util.ArrayList;
 
+import cn.wildfirechat.model.Conversation;
 
 
 public class VoipExt extends ConversationExt {

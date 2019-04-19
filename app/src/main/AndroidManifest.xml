@@ -42,6 +42,7 @@
 
 
     <application
+        android:name=".app.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -57,28 +58,28 @@
             </intent-filter>
         </activity>
 
-        <!--<meta-data-->
-            <!--android:name="android.max_aspect"-->
-            <!--android:value="2.1" />-->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
 
-        <!--<meta-data-->
-            <!--android:name="design_width"-->
-            <!--android:value="720" />-->
-        <!--<meta-data-->
-            <!--android:name="design_height"-->
-            <!--android:value="1280" />-->
-        <!--<meta-data-->
-            <!--android:name="android.max_aspect"-->
-            <!--android:value="2.1" />-->
+        <meta-data
+            android:name="design_width"
+            android:value="720" />
+        <meta-data
+            android:name="design_height"
+            android:value="1280" />
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
 
-        <!--<meta-data-->
-            <!--android:name="android.webkit.WebView.EnableSafeBrowsing"-->
-            <!--android:value="true" />-->
+        <meta-data
+            android:name="android.webkit.WebView.EnableSafeBrowsing"
+            android:value="true" />
 
-        <!--&lt;!&ndash;地图&ndash;&gt;-->
-        <!--<meta-data-->
-            <!--android:name="TencentMapSDK"-->
-            <!--android:value="TYQBZ-MRBKU-K7FVL-4JBW5-DOG5O-SZB4A" />-->
+        <!--地图-->
+        <meta-data
+            android:name="TencentMapSDK"
+            android:value="TYQBZ-MRBKU-K7FVL-4JBW5-DOG5O-SZB4A" />
 
         <!--<activity-->
             <!--android:name="cn.wildfire.chat.app.main.SplashActivity"-->
@@ -128,9 +129,10 @@
             <!--android:name="cn.wildfire.chat.app.third.location.ui.activity.ShowLocationActivity"-->
             <!--android:screenOrientation="portrait" />-->
 
-        <!--<activity-->
-            <!--android:name="cn.wildfire.chat.kit.preview.MMPreviewActivity"-->
-            <!--android:theme="@style/AppTheme.FullScreen" />-->
+        <activity
+            android:name=".preview.MMPreviewActivity"
+            android:theme="@style/AppTheme.FullScreen" />
+
         <!--<activity android:name="cn.wildfire.chat.kit.voip.SingleVoipCallActivity" />-->
         <!--<activity-->
             <!--android:name="cn.wildfire.chat.kit.conversation.CreateConversationActivity"-->
@@ -180,7 +182,8 @@
         <!--<activity-->
             <!--android:name="cn.wildfire.chat.kit.channel.ChannelListActivity"-->
             <!--android:label="频道列表" />-->
-
+        <!---->
+        <!---->
         <!--<activity-->
             <!--android:name="cn.wildfire.chat.kit.channel.CreateChannelActivity"-->
             <!--android:label="创建频道"-->

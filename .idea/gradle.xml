@@ -3,16 +3,17 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <compositeConfiguration>
-          <compositeBuild compositeDefinitionSource="SCRIPT" />
-        </compositeConfiguration>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/avenginekit" />
+            <option value="$PROJECT_DIR$/client" />
+            <option value="$PROJECT_DIR$/emojilibrary" />
             <option value="$PROJECT_DIR$/imagepicker" />
+            <option value="$PROJECT_DIR$/mars-core-release" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

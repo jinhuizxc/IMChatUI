@@ -21,6 +21,7 @@ public class MyApp extends BaseApp {
             wfcUIKit = new WfcUIKit();
             wfcUIKit.init(this);
         }
+
     }
 
     public static String getCurProcessName(Context context) {

@@ -6,13 +6,13 @@ import android.view.View;
 
 
 import com.example.imchatui.R;
-import com.example.imchatui.annotation.ExtContextMenuItem;
-import com.example.imchatui.ext.core.ConversationExt;
+import com.example.imchatui.kit.annotation.ExtContextMenuItem;
+import com.example.imchatui.manager.ConversationExt;
 import com.example.imchatui.location.MyLocationActivity;
 import com.example.imchatui.location.data.LocationData;
-import com.example.imchatui.model.Conversation;
 
 import cn.wildfirechat.message.TypingMessageContent;
+import cn.wildfirechat.model.Conversation;
 
 import static android.app.Activity.RESULT_OK;
 

@@ -1,7 +1,9 @@
 package cn.wildfirechat.model;
 
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.RequiresApi;
 
 import java.util.Objects;
 
@@ -83,6 +85,7 @@ public class Conversation implements Parcelable {
         return super.equals(obj);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public int hashCode() {
         return Objects.hash(type, target, line);

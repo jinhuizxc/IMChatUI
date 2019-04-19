@@ -5,16 +5,13 @@ import android.content.Intent;
 import android.view.View;
 
 import com.example.imchatui.R;
-import com.example.imchatui.annotation.ExtContextMenuItem;
-import com.example.imchatui.ext.core.ConversationExt;
-import com.example.imchatui.model.Conversation;
-import com.example.imchatui.takephoto.TakePhotoActivity;
-import com.example.imchatui.utils.ImageUtils;
-
-import java.io.File;
+import com.example.imchatui.kit.annotation.ExtContextMenuItem;
+import com.example.imchatui.manager.ConversationExt;
+import com.example.imchatui.preview.TakePhotoActivity;
 
 
 import cn.wildfirechat.message.TypingMessageContent;
+import cn.wildfirechat.model.Conversation;
 
 import static android.app.Activity.RESULT_OK;
 

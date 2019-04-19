@@ -6,9 +6,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.example.imchatui.R;
-import com.example.imchatui.annotation.ExtContextMenuItem;
-import com.example.imchatui.ext.core.ConversationExt;
-import com.example.imchatui.model.Conversation;
+import com.example.imchatui.kit.annotation.ExtContextMenuItem;
+import com.example.imchatui.manager.ConversationExt;
+
+import cn.wildfirechat.model.Conversation;
 
 
 //用来演示类似微信语音输入那种扩展

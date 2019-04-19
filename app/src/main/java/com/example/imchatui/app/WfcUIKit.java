@@ -1,29 +1,21 @@
 package com.example.imchatui.app;
 
-import android.app.Activity;
 import android.app.Application;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.arch.lifecycle.ProcessLifecycleOwner;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.AudioManager;
-import android.net.Uri;
-import android.text.TextUtils;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.lqr.emoji.LQREmotionKit;
 
-import java.util.Iterator;
 import java.util.List;
 
 import cn.wildfirechat.avenginekit.AVEngineKit;
 import cn.wildfirechat.message.Message;
-import cn.wildfirechat.remote.ChatManager;
 import cn.wildfirechat.remote.OnRecallMessageListener;
 import cn.wildfirechat.remote.OnReceiveMessageListener;
 

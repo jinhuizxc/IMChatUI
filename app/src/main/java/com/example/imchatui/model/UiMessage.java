@@ -3,9 +3,9 @@ package com.example.imchatui.model;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
-import com.example.imchatui.model.message.Message;
-
 import java.util.Objects;
+
+import cn.wildfirechat.message.Message;
 
 public class UiMessage {
 
