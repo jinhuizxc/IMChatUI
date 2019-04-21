@@ -6,16 +6,21 @@ import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.arch.lifecycle.ProcessLifecycleOwner;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.text.TextUtils;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.imchatui.viewmodel.ChatManagerHolder;
 import com.lqr.emoji.LQREmotionKit;
 
 import java.util.List;
 
 import cn.wildfirechat.avenginekit.AVEngineKit;
+import cn.wildfirechat.client.NotInitializedExecption;
 import cn.wildfirechat.message.Message;
+import cn.wildfirechat.remote.ChatManager;
 import cn.wildfirechat.remote.OnRecallMessageListener;
 import cn.wildfirechat.remote.OnReceiveMessageListener;
 
@@ -27,7 +32,7 @@ public class WfcUIKit implements AVEngineKit.AVEngineCallback, OnReceiveMessageL
 
     public void init(Application application) {
         this.application = application;
-//        initWFClient(application);
+        initWFClient(application);
         //初始化表情控件
         LQREmotionKit.init(application, (context, path, imageView)
                 -> Glide.with(context).load(path)
@@ -51,30 +56,31 @@ public class WfcUIKit implements AVEngineKit.AVEngineCallback, OnReceiveMessageL
         });
     }
 
-//    private void initWFClient(Application application) {
-//        ChatManager.init(application, Config.IM_SERVER_HOST, Config.IM_SERVER_PORT);
-//        try {
-//            ChatManagerHolder.gChatManager = ChatManager.Instance();
-//            ChatManagerHolder.gChatManager.startLog();
-//            ChatManagerHolder.gChatManager.addOnReceiveMessageListener(this);
-//            ChatManagerHolder.gChatManager.addRecallMessageListener(this);
+    private void initWFClient(Application application) {
+        ChatManager.init(application, Config.IM_SERVER_HOST, Config.IM_SERVER_PORT);
+        try {
+            ChatManagerHolder.gChatManager = ChatManager.Instance();
+            ChatManagerHolder.gChatManager.startLog();
+            ChatManagerHolder.gChatManager.addOnReceiveMessageListener(this);
+            ChatManagerHolder.gChatManager.addRecallMessageListener(this);
+            // TODO
 //            PushService.init(application);
-//
 //            ringPlayer = new AsyncPlayer(null);
-//            AVEngineKit.init(application, this);
-//            ChatManagerHolder.gAVEngine = AVEngineKit.Instance();
+
+            AVEngineKit.init(application, this);
+            ChatManagerHolder.gAVEngine = AVEngineKit.Instance();
 //            ChatManagerHolder.gAVEngine.addIceServer(Config.ICE_ADDRESS, Config.ICE_USERNAME, Config.ICE_PASSWORD);
-//
-//            SharedPreferences sp = application.getSharedPreferences("config", Context.MODE_PRIVATE);
-//            String id = sp.getString("id", null);
-//            String token = sp.getString("token", null);
-//            if (!TextUtils.isEmpty(id) && !TextUtils.isEmpty(token)) {
-//                ChatManagerHolder.gChatManager.connect(id, token);
-//            }
-//        } catch (NotInitializedExecption notInitializedExecption) {
-//            notInitializedExecption.printStackTrace();
-//        }
-//    }
+
+            SharedPreferences sp = application.getSharedPreferences("config", Context.MODE_PRIVATE);
+            String id = sp.getString("id", null);
+            String token = sp.getString("token", null);
+            if (!TextUtils.isEmpty(id) && !TextUtils.isEmpty(token)) {
+                ChatManagerHolder.gChatManager.connect(id, token);
+            }
+        } catch (NotInitializedExecption notInitializedExecption) {
+            notInitializedExecption.printStackTrace();
+        }
+    }
 
     @Override
     public void onReceiveCall(AVEngineKit.CallSession session) {

@@ -1,1 +1,1 @@
-include ':app', ':imagepicker', ':emojilibrary', ':avenginekit', ':mars-core-release', ':client'
+include ':app', ':imagepicker', ':emojilibrary', ':avenginekit', ':mars-core-release', ':client', ':photoview'

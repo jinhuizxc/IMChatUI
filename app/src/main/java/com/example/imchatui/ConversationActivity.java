@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,6 +33,10 @@ import cn.wildfirechat.model.UserInfo;
  * TODO 冲突解决的方案,
  * 1. 解析包错误问题, 问题解决！
  * 2. 键盘冲突问题;
+ *
+ * 查看具体的log信息；
+ * gradlew processDebugManifest --stacktrace
+ *
  */
 public class ConversationActivity extends BaseActivity implements
         KeyboardAwareLinearLayout.OnKeyboardShownListener,
@@ -69,6 +74,25 @@ public class ConversationActivity extends BaseActivity implements
     private String conversationTitle = "";
     private SharedPreferences sharedPreferences;
 
+    public static Intent buildConversationIntent(Context context, Conversation.ConversationType type, String target, int line) {
+        return buildConversationIntent(context, type, target, line, -1);
+    }
+
+    public static Intent buildConversationIntent(Context context, Conversation.ConversationType type, String target, int line, long toFocusMessageId) {
+        Conversation conversation = new Conversation(type, target, line);
+        return buildConversationIntent(context, conversation, null, toFocusMessageId);
+    }
+
+    public static Intent buildConversationIntent(Context context, Conversation conversation, String channelPrivateChatUser, long toFocusMessageId) {
+        Intent intent = new Intent(context, ConversationActivity.class);
+        intent.putExtra("conversation", conversation);
+        intent.putExtra("toFocusMessageId", toFocusMessageId);
+        intent.putExtra("channelPrivateChatUser", channelPrivateChatUser);
+        return intent;
+    }
+
+
+
     @Override
     protected int contentLayout() {
         return R.layout.activity_conversation;
@@ -87,7 +111,7 @@ public class ConversationActivity extends BaseActivity implements
 //        if (conversation == null) {
 //            finish();
 //        }
-        setupConversation(conversation); // 原
+        setupConversation(conversation);
 //        conversationViewModel.clearUnreadStatus(conversation);
     }
 
@@ -109,35 +133,35 @@ public class ConversationActivity extends BaseActivity implements
 
         inputPanel.setupConversation(conversationViewModel, conversation);
 
-        MutableLiveData<List<UiMessage>> messages;
-        if (initialFocusedMessageId != -1) {
-            shouldContinueLoadNewMessage = true;
-            messages = conversationViewModel.loadAroundMessages(initialFocusedMessageId, MESSAGE_LOAD_AROUND);
-        } else {
-            messages = conversationViewModel.getMessages();
-        }
+//        MutableLiveData<List<UiMessage>> messages;
+//        if (initialFocusedMessageId != -1) {
+//            shouldContinueLoadNewMessage = true;
+//            messages = conversationViewModel.loadAroundMessages(initialFocusedMessageId, MESSAGE_LOAD_AROUND);
+//        } else {
+//            messages = conversationViewModel.getMessages();
+//        }
 
         // load message
-        swipeRefreshLayout.setRefreshing(true);
-        messages.observe(this, uiMessages -> {
-            swipeRefreshLayout.setRefreshing(false);
-            adapter.setMessages(uiMessages);
-            adapter.notifyDataSetChanged();
-
-            if (adapter.getItemCount() > 1) {
-                int initialMessagePosition;
-                if (initialFocusedMessageId != -1) {
-                    initialMessagePosition = adapter.getMessagePosition(initialFocusedMessageId);
-                    if (initialMessagePosition != -1) {
-                        recyclerView.scrollToPosition(initialMessagePosition);
-                        adapter.highlightFocusMessage(initialMessagePosition);
-                    }
-                } else {
-                    moveToBottom = true;
-                    recyclerView.scrollToPosition(adapter.getItemCount() - 1);
-                }
-            }
-        });
+//        swipeRefreshLayout.setRefreshing(true);
+//        messages.observe(this, uiMessages -> {
+//            swipeRefreshLayout.setRefreshing(false);
+//            adapter.setMessages(uiMessages);
+//            adapter.notifyDataSetChanged();
+//
+//            if (adapter.getItemCount() > 1) {
+//                int initialMessagePosition;
+//                if (initialFocusedMessageId != -1) {
+//                    initialMessagePosition = adapter.getMessagePosition(initialFocusedMessageId);
+//                    if (initialMessagePosition != -1) {
+//                        recyclerView.scrollToPosition(initialMessagePosition);
+//                        adapter.highlightFocusMessage(initialMessagePosition);
+//                    }
+//                } else {
+//                    moveToBottom = true;
+//                    recyclerView.scrollToPosition(adapter.getItemCount() - 1);
+//                }
+//            }
+//        });
         if (conversation.type == cn.wildfirechat.model.Conversation.ConversationType.ChatRoom) {
             // TODO
 //            joinChatRoom();
