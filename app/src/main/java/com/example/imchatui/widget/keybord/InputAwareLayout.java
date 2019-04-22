@@ -1,4 +1,4 @@
-package com.example.imchatui.widget;
+package com.example.imchatui.widget.keybord;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -89,6 +89,7 @@ public class InputAwareLayout extends KeyboardAwareLinearLayout implements Keybo
     }
 
     public interface InputView {
+
         void show(int height, boolean immediate);
 
         void hide(boolean immediate);

@@ -90,7 +90,7 @@
 
         <View style="@style/Line" />
 
-        <com.example.imchatui.widget.KeyboardHeightFrameLayout
+        <com.example.imchatui.widget.keybord.KeyboardHeightFrameLayout
             android:id="@+id/emotionContainerFrameLayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/default_custom_keyboard_size"
@@ -102,9 +102,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone" />
-        </com.example.imchatui.widget.KeyboardHeightFrameLayout>
+        </com.example.imchatui.widget.keybord.KeyboardHeightFrameLayout>
 
-        <com.example.imchatui.widget.KeyboardHeightFrameLayout
+        <com.example.imchatui.widget.keybord.KeyboardHeightFrameLayout
             android:id="@+id/extContainerContainerLayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/default_custom_keyboard_size"
@@ -117,6 +117,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-        </com.example.imchatui.widget.KeyboardHeightFrameLayout>
+        </com.example.imchatui.widget.keybord.KeyboardHeightFrameLayout>
     </LinearLayout>
 </merge>

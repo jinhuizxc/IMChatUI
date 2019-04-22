@@ -27,6 +27,8 @@ import com.example.imchatui.audio.AudioRecorderPanel;
 import com.example.imchatui.kit.conversation.ConversationViewModel;
 import com.example.imchatui.kit.conversation.mention.MentionSpan;
 import com.example.imchatui.manager.ConversationExtension;
+import com.example.imchatui.widget.keybord.InputAwareLayout;
+import com.example.imchatui.widget.keybord.KeyboardHeightFrameLayout;
 import com.lqr.emoji.EmotionLayout;
 import com.lqr.emoji.IEmotionExtClickListener;
 import com.lqr.emoji.IEmotionSelectedListener;

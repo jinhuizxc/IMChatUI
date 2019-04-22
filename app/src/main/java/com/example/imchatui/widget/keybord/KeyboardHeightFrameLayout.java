@@ -1,4 +1,4 @@
-package com.example.imchatui.widget;
+package com.example.imchatui.widget.keybord;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.example.imchatui.widget.keybord.InputAwareLayout;
 
 
 public class KeyboardHeightFrameLayout extends FrameLayout implements InputAwareLayout.InputView {

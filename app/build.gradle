@@ -88,5 +88,8 @@ dependencies {
     implementation 'com.lqr.optionitemview:library:1.0.7'
 
     implementation 'com.king.zxing:zxing-lite:1.0.6'
+    // switchbutton
+    implementation 'com.kyleduo.switchbutton:library:2.0.0'
+
 
 }

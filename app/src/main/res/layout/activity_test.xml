@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TestActivity">
+
+
+    <com.kyleduo.switchbutton.SwitchButton
+        android:id="@+id/like_select"
+        android:layout_width="37dp"
+        android:layout_height="@dimen/daza_space_20"
+        android:layout_marginRight="@dimen/daza_space_15"
+        app:kswAnimationDuration="0"
+        app:kswBackColor="@color/selector_color_switch_back"
+        app:kswThumbColor="@color/selector_color_switch_thumb"
+        app:kswThumbHeight="@dimen/daza_space_20"
+        app:kswThumbRangeRatio="2"
+        app:kswThumbWidth="@dimen/daza_space_20" />
+
+</LinearLayout>

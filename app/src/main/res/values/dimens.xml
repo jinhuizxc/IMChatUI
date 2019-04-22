@@ -17,4 +17,75 @@
     <dimen name="default_custom_keyboard_size">220dp</dimen>
     <dimen name="min_custom_keyboard_size">110dp</dimen>
     <dimen name="min_custom_keyboard_top_margin">170dp</dimen>
+
+    <dimen name="daza_font_9">9sp</dimen>
+    <dimen name="daza_font_10">10sp</dimen>
+    <dimen name="daza_font_11">11sp</dimen>
+    <dimen name="daza_font_12">12sp</dimen>
+    <dimen name="daza_font_13">13sp</dimen>
+    <dimen name="daza_font_14">14sp</dimen>
+    <dimen name="daza_font_15">15sp</dimen>
+    <dimen name="daza_font_16">16sp</dimen>
+    <dimen name="daza_font_17">17sp</dimen>
+    <dimen name="daza_font_18">18sp</dimen>
+    <dimen name="daza_font_20">20sp</dimen>
+    <dimen name="daza_font_22">22sp</dimen>
+    <dimen name="daza_font_30">30sp</dimen>
+
+
+    <dimen name="daza_space_1">1dp</dimen>
+    <dimen name="daza_space_2">2dp</dimen>
+    <dimen name="daza_space_3">3dp</dimen>
+    <dimen name="daza_space_5">5dp</dimen>
+    <dimen name="daza_space_6">6dp</dimen>
+    <dimen name="daza_space_7">7dp</dimen>
+    <dimen name="daza_space_8">8dp</dimen>
+    <dimen name="daza_space_9">9dp</dimen>
+    <dimen name="daza_space_10">10dp</dimen>
+    <dimen name="daza_space_12">12dp</dimen>
+    <dimen name="daza_space_13">13dp</dimen>
+    <dimen name="daza_space_14">14dp</dimen>
+    <dimen name="daza_space_15">15dp</dimen>
+    <dimen name="daza_space_16">16dp</dimen>
+    <dimen name="daza_space_17">17dp</dimen>
+    <dimen name="daza_space_18">18dp</dimen>
+    <dimen name="daza_space_19">19dp</dimen>
+    <dimen name="daza_space_20">20dp</dimen>
+    <dimen name="daza_space_22">22dp</dimen>
+    <dimen name="daza_space_24">24dp</dimen>
+    <dimen name="daza_space_26">26dp</dimen>
+    <dimen name="daza_space_30">30dp</dimen>
+
+    <dimen name="daza_dialog_item_height">58dp</dimen>
+    <dimen name="daza_dialog_item_height_2">50dp</dimen>
+
+
+    <dimen name="header_actionbar_height">44dp</dimen>
+    <dimen name="header_action_size">26dp</dimen>
+    <dimen name="button_height">42dp</dimen>
+
+    <dimen name="bottom_tab_height">70dp</dimen>
+    <dimen name="bottom_tab_icon_size_1">25dp</dimen>
+    <dimen name="bottom_tab_icon_size_2">60dp</dimen>
+    <dimen name="bottom_tab_line_height">2dp</dimen>
+
+    <dimen name="setting_icon_size">27dp</dimen>
+
+    <dimen name="video_play_height">210dp</dimen>
+    <dimen name="video_detail_head_height">44dp</dimen>
+    <dimen name="video_detail_head_return_margin_left">16.3dp</dimen>
+    <dimen name="video_detail_head_share_margin_right">10dp</dimen>
+
+    <dimen name="stick_header_height">48dp</dimen>
+
+    <dimen name="edit_padding_top">0dp</dimen>
+
+    <dimen name="short_video_item_height">214dp</dimen>
+    <dimen name="appBar_head">50dp</dimen>
+    <dimen name="toolbar_height">50dp</dimen>
+    <dimen name="max_head">200dp</dimen>
+    <dimen name="normal_space">10dp</dimen>
+    <dimen name="toolbar_height1">60dp</dimen>
+    <dimen name="normal_space1">70dp</dimen>
+
 </resources>

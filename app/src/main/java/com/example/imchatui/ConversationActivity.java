@@ -1,12 +1,9 @@
 package com.example.imchatui;
 
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,18 +13,12 @@ import android.text.TextUtils;
 import com.example.imchatui.adapter.ConversationMessageAdapter;
 import com.example.imchatui.base.BaseActivity;
 import com.example.imchatui.kit.conversation.ConversationViewModel;
-import com.example.imchatui.model.UiMessage;
 import com.example.imchatui.widget.ConversationInputPanel;
-import com.example.imchatui.widget.InputAwareLayout;
-import com.example.imchatui.widget.KeyboardAwareLinearLayout;
-
-import java.util.List;
+import com.example.imchatui.widget.keybord.InputAwareLayout;
+import com.example.imchatui.widget.keybord.KeyboardAwareLinearLayout;
 
 import butterknife.BindView;
-import cn.wildfirechat.model.ChannelInfo;
 import cn.wildfirechat.model.Conversation;
-import cn.wildfirechat.model.GroupInfo;
-import cn.wildfirechat.model.UserInfo;
 
 /**
  * TODO 冲突解决的方案,
